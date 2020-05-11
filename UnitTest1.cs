@@ -94,6 +94,28 @@ namespace Lab5
         }
 
         [TestMethod]
+        public void BuildHeap()
+        {
+            var heap = new BinaryHeap<int>(Comparer<int>.Create((a, b) => b.CompareTo(a)));
+
+            const int n = 10000;
+            var randomSet = new List<int>();
+            var rd = new Random();
+
+            for (var i = 0; i < n; i++)
+                randomSet.Add(rd.Next(-n, n));
+            
+            var array = randomSet.ToArray();
+
+            heap.BuildHeap(array);
+
+            Array.Sort(array);
+
+            foreach (var item in array)
+                Assert.AreEqual(item, heap.ReturnRoot());
+        }
+
+        [TestMethod]
         public void BuildHeapWithMinimalHeapWorksProperly()
         {
             var heap = new BinaryHeap<int>(Comparer<int>.Create((a, b) => b.CompareTo(a)));
