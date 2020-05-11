@@ -61,6 +61,7 @@ namespace Lab5
 
             heap.BuildHeap(numbers);
 
+
             Assert.AreEqual(numbers.Max(), heap.FindRoot());
         }
 
