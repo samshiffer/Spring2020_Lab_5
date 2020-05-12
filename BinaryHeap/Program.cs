@@ -10,7 +10,7 @@ namespace BinaryHeap
     {
         private static void Main(string[] args)
         {
-            const int n = 100000; 
+            const int n = 10000; 
 
             var unsortedWithRepeats = GenerateUnsortedWithRepeats(n);
             Action action = () => SelectionSort(unsortedWithRepeats); 
@@ -22,7 +22,7 @@ namespace BinaryHeap
 
             var binaryHeap = new BinaryHeap<int>(Comparer<int>.Create((a, b) => b.CompareTo(a)));
             unsortedWithRepeats = GenerateUnsortedWithRepeats(n);
-            action = () => binaryHeap.BuildHeap(unsortedWithRepeats);
+            action = () => binaryHeap.HeapSort(unsortedWithRepeats);
             Console.WriteLine("Время пирамидальной сортировки несортированного множества с повторениями: " + RunStopwatch(action));
 
             Console.WriteLine("\n******************************\n");
@@ -37,7 +37,7 @@ namespace BinaryHeap
 
             binaryHeap = new BinaryHeap<int>(Comparer<int>.Create((a, b) => b.CompareTo(a)));
             unsortedWithoutRepeats = GenerateUnsortedWithoutRepeats(n);
-            action = () => binaryHeap.BuildHeap(unsortedWithoutRepeats);
+            action = () => binaryHeap.HeapSort(unsortedWithoutRepeats);
             Console.WriteLine("Время пирамидальной сортировки несортированного множества без повторений: " + RunStopwatch(action));
 
             Console.WriteLine("\n******************************\n");
@@ -52,7 +52,7 @@ namespace BinaryHeap
 
             binaryHeap = new BinaryHeap<int>(Comparer<int>.Create((a, b) => b.CompareTo(a)));
             sorted = GenerateSorted(n);
-            action = () => binaryHeap.BuildHeap(sorted);
+            action = () => binaryHeap.HeapSort(sorted);
             Console.WriteLine("Время пирамидальной сортировки сортированного множества: " + RunStopwatch(action));
 
             Console.WriteLine("\n******************************\n");
@@ -67,7 +67,7 @@ namespace BinaryHeap
 
             binaryHeap = new BinaryHeap<int>(Comparer<int>.Create((a, b) => b.CompareTo(a)));
             partiallySorted = GeneratePartiallySorted(n);
-            action = () => binaryHeap.BuildHeap(partiallySorted);
+            action = () => binaryHeap.HeapSort(partiallySorted);
             Console.WriteLine("Время пирамидальной сортировки частично отсортированного множества: " + RunStopwatch(action));
 
         }

@@ -13,15 +13,17 @@ namespace BinaryHeapLib
 
         public BinaryHeap(IComparer<T> comparer)
         {
+            Count = 0;
             _list = new List<T>();
             _comparer = comparer ?? throw new ArgumentNullException();
         }
 
-        public int Count => this._list.Count;
+        public int Count;
 
         public void Add(T item)
         {
             _list.Add(item);
+            Count++;
             HeapifyOnAdding(Count - 1);
         }
 
@@ -47,11 +49,11 @@ namespace BinaryHeapLib
                 throw new InvalidOperationException();
 
             var root = _list[0];
-
             _list[0] = _list[Count - 1];
-            _list.RemoveAt(Count - 1);
+            _list[Count - 1] = root;
+            Count--;
 
-            Restore();
+            Heapify(0);
 
             return root;
         }
@@ -88,7 +90,20 @@ namespace BinaryHeapLib
         public void BuildHeap(T[] sourceArray)
         {
             _list = sourceArray.ToList();
+            Count = sourceArray.Length;
             Restore();
+        }
+        
+        public T[] HeapSort (T[] array)
+        {
+            BuildHeap(array);
+
+            while (Count > 0)
+            {
+                ReturnRoot();
+            }
+
+            return _list.ToArray();
         }
 
         private void Restore()
